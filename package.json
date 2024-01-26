@@ -9,12 +9,16 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/debug": "^4.1.12"
+    "@types/debug": "^4.1.12",
+    "husky": "^9.0.6",
+    "lint-staged": "^15.2.0",
+    "prettier": "^3.2.4"
   },
   "scripts": {
     "remove-cache": "rm -rf ~/.config/changelog-cli/cache.db",
     "start": "bun run src/index.ts",
-    "start-debug": "DEBUG=* bun run src/index.ts"
+    "start-debug": "DEBUG=* bun run src/index.ts",
+    "prepare": "husky"
   },
   "name": "changed",
   "module": "index.ts",
