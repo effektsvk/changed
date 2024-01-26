@@ -58,9 +58,9 @@ export class Repo {
     force?: boolean,
   ): Promise<Repo> {
     // get current version from cdn
-    const cdnResponse = await fetch(
-      `https://cdn.jsdelivr.net/npm/${name}/package.json`,
-    );
+    const packageJsonUrl = `https://cdn.jsdelivr.net/npm/${name}/package.json`;
+    debug(`Fetching ${packageJsonUrl}`);
+    const cdnResponse = await fetch(packageJsonUrl);
     const packageJson = (await cdnResponse.json()) as PackageJson;
     const { version, repository } = packageJson;
     if (version === undefined) {
@@ -78,9 +78,9 @@ export class Repo {
     }
 
     // fetch new changelog from cdn
-    const changelogResponse = await fetch(
-      `https://cdn.jsdelivr.net/npm/${name}/CHANGELOG.md`,
-    );
+    const changelogUrl = `https://cdn.jsdelivr.net/npm/${name}/CHANGELOG.md`;
+    debug(`Fetching ${changelogUrl}`);
+    const changelogResponse = await fetch(changelogUrl);
     if (changelogResponse.status === 404) {
       debug(
         "Changelog not released on NPM. Trying to fetch changelog from git repo...",
