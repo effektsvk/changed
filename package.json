@@ -23,8 +23,12 @@
     "start-debug": "DEBUG=* bun run src/index.ts",
     "prepare": "husky"
   },
-  "name": "changed",
-  "module": "index.ts",
+  "name": "changed-bun",
+  "bin": {
+    "chgd": "src/index.ts",
+    "changed": "src/index.ts"
+  },
+  "module": "src/index.ts",
   "type": "module",
   "peerDependencies": {
     "typescript": "^5.0.0"
