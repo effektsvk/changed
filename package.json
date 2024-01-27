@@ -25,6 +25,7 @@
   },
   "name": "changed-bun",
   "version": "0.0.1",
+  "license": "MIT",
   "bin": {
     "chgd": "src/index.ts",
     "changed": "src/index.ts"
