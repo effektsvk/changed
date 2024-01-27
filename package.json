@@ -24,7 +24,7 @@
     "prepare": "husky"
   },
   "name": "changed-bun",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "bin": {
     "chgd": "src/index.ts",
