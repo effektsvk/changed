@@ -2,10 +2,8 @@
 
 ## Features
 - Get changelog of NPM packages easily
-- Blazing fast due to use of caching and jsDelivr CDN
+- Blazing fast due to use of bun, changelog caching and jsDelivr CDN
 - Changelog texts are cached in local database (default path is `~/.config/changed-bun/cache.db`)
-
----
 
 ## Usage
 ```
