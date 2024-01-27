@@ -63,6 +63,7 @@ export class Repo {
     const cdnResponse = await fetch(packageJsonUrl);
     const packageJson = (await cdnResponse.json()) as PackageJson;
     const { version, repository } = packageJson;
+    debug(`Package version: ${version}`);
     if (version === undefined) {
       throw new Error("Version is undefined");
     }
@@ -78,9 +79,11 @@ export class Repo {
     }
 
     // fetch new changelog from cdn
-    const changelogUrl = `https://cdn.jsdelivr.net/npm/${name}/CHANGELOG.md`;
+    let changelogText = "";
+    const changelogUrl = `https://cdn.jsdelivr.net/npm/${name}@${version}/CHANGELOG.md`;
     debug(`Fetching ${changelogUrl}`);
     const changelogResponse = await fetch(changelogUrl);
+    changelogText = await changelogResponse.text();
     if (changelogResponse.status === 404) {
       debug(
         "Changelog not released on NPM. Trying to fetch changelog from git repo...",
@@ -91,10 +94,22 @@ export class Repo {
         debug("Repo url not found");
         throw new Error("Repo URL not found");
       }
-      // TODO: fetch changelog from git repo
-      throw new Error("Fetching changelog from git repo not implemented yet");
+      const repoAuthorAndNameRegex = /github\.com\/(\w*?)\/([\w-]*)(?:\.git)?/;
+      const repoAuthorAndName = repoUrl.match(repoAuthorAndNameRegex);
+      if (repoAuthorAndName === null) {
+        debug("Repo author and name not found");
+        throw new Error("Repo author and name not found");
+      }
+      const [, repoAuthor, repoName] = repoAuthorAndName;
+      const repoChangelogUrl = `https://raw.githubusercontent.com/${repoAuthor}/${repoName}/v${version}/CHANGELOG.md`;
+      debug(`Fetching ${repoChangelogUrl}`);
+      const repoChangelogResponse = await fetch(repoChangelogUrl);
+      if (repoChangelogResponse.status === 404) {
+        debug("Changelog not found in git repo");
+        throw new Error("Changelog not found in git repo");
+      }
+      changelogText = await repoChangelogResponse.text();
     }
-    const changelogText = await changelogResponse.text();
 
     // update or create repo
     if (existingRepo !== undefined) {
