@@ -7,7 +7,7 @@ import _debug from "debug";
 const debugDbInit = _debug("app:db:init");
 const debug = _debug("app:db:helper");
 
-const DEFAULT_DB_DIR = join(homedir(), ".config/changelog-cli");
+const DEFAULT_DB_DIR = join(homedir(), ".config/changed-bun");
 const DEFAULT_DB_PATH = join(DEFAULT_DB_DIR, "cache.db");
 const DB_PATH = process.env.CHG_CACHE_DB_PATH ?? DEFAULT_DB_PATH;
 

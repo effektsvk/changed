@@ -18,7 +18,7 @@
   },
   "scripts": {
     "commitlint": "commitlint --edit",
-    "remove-cache": "rm -rf ~/.config/changelog-cli/cache.db",
+    "remove-cache": "rm -rf ~/.config/changed-bun/cache.db",
     "start": "bun run src/index.ts",
     "start-debug": "DEBUG=* bun run src/index.ts",
     "prepare": "husky"
