@@ -1,15 +1,27 @@
-# chg-cli-bun
+# changed
 
-To install dependencies:
+## Features
+- Get changelog of NPM packages easily
+- Blazing fast due to use of caching and jsDelivr CDN
+- Changelog texts are cached in local database (default path is `~/.config/changed-bun/cache.db`)
 
-```bash
-bun install
+---
+
+## Usage
 ```
+$ chgd rimraf
 
-To run:
+5.0
 
-```bash
-bun run index.ts
+ • No default export, only named exports
+
+4.4
+
+ • Provide Dirent or Stats object as second argument to filter
+
+4.3
+
+ • Return boolean indicating whether the path was fully removed
+ • Add filter option
+...
 ```
-
-This project was created using `bun init` in bun v1.0.21. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
