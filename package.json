@@ -24,6 +24,7 @@
     "prepare": "husky"
   },
   "name": "changed-bun",
+  "version": "0.0.1",
   "bin": {
     "chgd": "src/index.ts",
     "changed": "src/index.ts"
